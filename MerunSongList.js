@@ -4,7 +4,7 @@ function initialize() {
   const table = document.querySelector('table');
   const tableParent = table.parentElement;
 
-  const input = document.createElement('input');
+  const input = document.querySelector('input');
   input.addEventListener('keypress', () => {
     if (event.key === 'Enter') filterRows();
   });
