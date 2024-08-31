@@ -80,12 +80,17 @@ function compareKeysReverse(a, b) {
 
 function changerowColor(){
   const table = document.querySelector("table");
-  let count = 0;
-  for (let i = 1; i < table.rows.length; i++) {
-    const row = table.rows[i];
-    if (row.style.display == 'none') continue;
-    if (count%2 == 0) row.style.backgroundColor = '#ffc0cb';
-    else row.style.backgroundColor = '#fffafa';
+  let count = -1;
+  for (let row of table.rows) {
+    if (count >= 0){
+      if (row.style.display == 'none') continue;
+      if (count%2 == 0) {
+        for (let cell of row.cells) cell.style.backgroundColor = '#ffc0cb';
+      }
+      else {
+        for (let cell of row.cells) cell.style.backgroundColor = '#fffafa';
+      }
+    }
     count++;
   }
 }
