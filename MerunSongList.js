@@ -28,7 +28,7 @@ function filterRows() {
       }
     }
   }
-  if (document.querySelector('#distinct').checked){
+  if (document.querySelector('#distinct').checked) {
     distinctRows()
   }
   hitCount();
@@ -83,13 +83,13 @@ function compareKeysReverse(a, b) {
   return 0;
 }
 
-function changerowColor(){
+function changerowColor() {
   const table = document.querySelector("table");
   let count = -1;
   for (let row of table.rows) {
-    if (count >= 0){
+    if (count >= 0) {
       if (row.classList.contains('displayNone')) continue;
-      if (count%2 == 0) {
+      if (count % 2 == 0) {
         for (let cell of row.cells) cell.style.backgroundColor = '#ffc0cb';
       }
       else {
@@ -100,7 +100,7 @@ function changerowColor(){
   }
 }
 
-function tagSearch(word){
+function tagSearch(word) {
   document.querySelector('input').value = word;
   filterRows();
 }
@@ -113,11 +113,11 @@ function distinctRows() {
     const row = table.rows[i];
     if (row.classList.contains('displayNone')) continue;
     row.classList.add('displayNone');
-    if (!titles.includes(row.cells[1].textContent)){
+    if (!titles.includes(row.cells[1].textContent)) {
       titles.push(row.cells[1].textContent);
       indexList.push([row.cells[1].textContent, row.cells[0].textContent, i]);
       row.classList.remove('displayNone');
-    } else if (parseInt(indexList.filter(el => el[0] == row.cells[1].textContent)[0][1]) < parseInt(row.cells[0].textContent)){
+    } else if (parseInt(indexList.filter(el => el[0] == row.cells[1].textContent)[0][1]) < parseInt(row.cells[0].textContent)) {
       const old = indexList.filter(el => el[0] == row.cells[1].textContent)[0];
       table.rows[parseInt(old[2])].classList.add('displayNone');
       const index = indexList.indexOf(old);
@@ -128,8 +128,27 @@ function distinctRows() {
   }
 }
 
-function hitCount(){
+function hitCount() {
   const table = document.querySelector('table');
   var hitList = table.querySelectorAll('tr:not(.displayNone)')
-  document.querySelector('#hit').textContent = (hitList.length - 1) + '件表示';
+  if (!document.querySelector('.jp').classList.contains('displayNone')) {
+    document.querySelector('#hit').textContent = (hitList.length - 1) + '件表示';
+  } else if (!document.querySelector('.en').classList.contains('displayNone')) {
+    document.querySelector('#hit').textContent = (hitList.length - 1) + ' hits';
+  }
+}
+
+function changeLanguage(lang) {
+  if (lang == 'jp') {
+    document.querySelectorAll('.en').forEach((elem) => { elem.classList.add('displayNone') });
+    document.querySelectorAll('.jp').forEach((elem) => { elem.classList.remove('displayNone') });
+    document.querySelectorAll('tr td:nth-child(3)').forEach((elem) => { elem.classList.add('ellipsis') });
+    document.querySelectorAll('tr td:nth-child(7)').forEach((elem) => { elem.classList.add('ellipsis') });
+  } else if (lang == 'en') {
+    document.querySelectorAll('.jp').forEach((elem) => { elem.classList.add('displayNone') });
+    document.querySelectorAll('.en').forEach((elem) => { elem.classList.remove('displayNone') });
+    document.querySelectorAll('tr td:nth-child(3)').forEach((elem) => { elem.classList.remove('ellipsis') });
+    document.querySelectorAll('tr td:nth-child(7)').forEach((elem) => { elem.classList.remove('ellipsis') });
+  }
+
 }
