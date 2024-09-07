@@ -11,22 +11,27 @@ function initialize() {
 
   document.querySelectorAll('th').forEach(th => th.onclick = sortRows);
   document.querySelector('th').classList.add('sort-asc');
+  hitCount();
 }
 
 function filterRows() {
-  const keyword = document.querySelector('input').value;
+  const keyword = document.querySelector('#word').value;
   const regex = new RegExp(keyword, 'i');
   const table = document.querySelector('table');
   for (let i = 1; i < table.rows.length; i++) {
     const row = table.rows[i];
-    row.style.display = 'none';
+    row.classList.add('displayNone');
     for (let j = 0; j < row.cells.length; j++) {
       if (row.cells[j].textContent.match(regex)) {
-        row.style.display = 'table-row';
+        row.classList.remove('displayNone');
         break;
       }
     }
   }
+  if (document.querySelector('#distinct').checked){
+    distinctRows()
+  }
+  hitCount();
   changerowColor();
 }
 
@@ -83,7 +88,7 @@ function changerowColor(){
   let count = -1;
   for (let row of table.rows) {
     if (count >= 0){
-      if (row.style.display == 'none') continue;
+      if (row.classList.contains('displayNone')) continue;
       if (count%2 == 0) {
         for (let cell of row.cells) cell.style.backgroundColor = '#ffc0cb';
       }
@@ -93,4 +98,38 @@ function changerowColor(){
     }
     count++;
   }
+}
+
+function tagSearch(word){
+  document.querySelector('input').value = word;
+  filterRows();
+}
+
+function distinctRows() {
+  const table = document.querySelector('table');
+  const titles = [];
+  const indexList = [];
+  for (let i = 1; i < table.rows.length; i++) {
+    const row = table.rows[i];
+    if (row.classList.contains('displayNone')) continue;
+    row.classList.add('displayNone');
+    if (!titles.includes(row.cells[1].textContent)){
+      titles.push(row.cells[1].textContent);
+      indexList.push([row.cells[1].textContent, row.cells[0].textContent, i]);
+      row.classList.remove('displayNone');
+    } else if (parseInt(indexList.filter(el => el[0] == row.cells[1].textContent)[0][1]) < parseInt(row.cells[0].textContent)){
+      const old = indexList.filter(el => el[0] == row.cells[1].textContent)[0];
+      table.rows[parseInt(old[2])].classList.add('displayNone');
+      const index = indexList.indexOf(old);
+
+      indexList[index] = [row.cells[1].textContent, row.cells[0].textContent, i];
+      row.classList.remove('displayNone');
+    }
+  }
+}
+
+function hitCount(){
+  const table = document.querySelector('table');
+  var hitList = table.querySelectorAll('tr:not(.displayNone)')
+  document.querySelector('#hit').textContent = (hitList.length - 1) + '件表示';
 }
