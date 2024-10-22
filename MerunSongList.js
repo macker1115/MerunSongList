@@ -8,6 +8,7 @@ function initialize() {
     if (event.key === 'Enter') filterRows();
   });
 
+  document.querySelectorAll('.ellipsis').forEach(th => th.onclick = changeEllipsis);
   document.querySelectorAll('th').forEach(th => th.onclick = sortRows);
   document.querySelector('th').classList.add('sort-asc');
   hitCount();
@@ -89,19 +90,23 @@ function changerowColor() {
   let count = -1;
   var before = '';
   for (let row of table.rows) {
-    if (count == 0){
+    if (count == 0) {
       before = row.cells[4].textContent;
     }
-    for (let cell of row.cells) cell.classList.remove('border');
+    for (let cell of row.cells) {
+      cell.classList.remove('border');
+      cell.classList.remove('odd');
+      cell.classList.remove('even');
+    }
     if (count >= 0) {
       if (row.classList.contains('displayNone')) continue;
       if (count % 2 == 0) {
-        for (let cell of row.cells) cell.style.backgroundColor = '#ffc0cb';
+        for (let cell of row.cells) cell.classList.add('even');
       }
       else {
-        for (let cell of row.cells) cell.style.backgroundColor = '#fffafa';
+        for (let cell of row.cells) cell.classList.add('odd');
       }
-      if (before != row.cells[4].textContent){
+      if (before != row.cells[4].textContent) {
         for (let cell of row.cells) cell.classList.add('border');
         before = row.cells[4].textContent;
       }
@@ -152,13 +157,18 @@ function changeLanguage(lang) {
   if (lang == 'jp') {
     document.querySelectorAll('.en').forEach((elem) => { elem.classList.add('displayNone') });
     document.querySelectorAll('.jp').forEach((elem) => { elem.classList.remove('displayNone') });
-    document.querySelectorAll('tr td:nth-child(3)').forEach((elem) => { elem.classList.add('ellipsis') });
-    document.querySelectorAll('tr td:nth-child(7)').forEach((elem) => { elem.classList.add('ellipsis') });
+    document.querySelectorAll('.multi').forEach((elem) => { elem.classList.remove('line-2'); elem.classList.add('line-1') });
   } else if (lang == 'en') {
     document.querySelectorAll('.jp').forEach((elem) => { elem.classList.add('displayNone') });
     document.querySelectorAll('.en').forEach((elem) => { elem.classList.remove('displayNone') });
-    document.querySelectorAll('tr td:nth-child(3)').forEach((elem) => { elem.classList.remove('ellipsis') });
-    document.querySelectorAll('tr td:nth-child(7)').forEach((elem) => { elem.classList.remove('ellipsis') });
+    document.querySelectorAll('.multi').forEach((elem) => { elem.classList.remove('line-1'); elem.classList.add('line-2') });
   }
+}
 
+function changeEllipsis() {
+  if (this.classList.contains('nowrap')) {
+    this.classList.remove('nowrap');
+  } else {
+    this.classList.add('nowrap');
+  }
 }

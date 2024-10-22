@@ -1,0 +1,229 @@
+/* スマホ表示 */
+@media only screen and (max-width: 800px) {
+    .smfont {
+        font-size: 0.85em;
+    }
+
+    #hit {
+        min-width: 75px !important;
+    }
+
+    .fixedTh {
+        width: 50vw !important;
+    }
+}
+
+/* jp/en 切り替え */
+.displayNone {
+    display: none !important;
+}
+
+/* タイトル */
+h2 {
+    margin: 0px;
+    color: #ff69b4;
+    display: inline-block
+}
+
+/* 検索ボックス */
+#word {
+    max-width: 170px;
+    width: 40%;
+}
+
+/* タグ検索 */
+.tags a,
+.tags a:visited {
+    color: inherit;
+}
+
+.tags a {
+    display: inline-block;
+}
+
+.tags {
+    display: table-cell;
+    text-align: left;
+    width: 100%;
+}
+
+/* 表示件数 */
+#hit {
+    display: table-cell;
+    text-align: right;
+    min-width: 90px;
+    vertical-align: bottom;
+}
+
+/* テーブル */
+.table-div {
+    overflow-y: auto;
+    height: calc(100svh - 185px);
+    margin: 3px 0px;
+}
+
+table {
+    border-collapse: collapse;
+    min-width: 1500px;
+    width: 100%;
+}
+
+.th-no {
+    width: 55px;
+}
+
+.th-title {
+    width: 30vw;
+}
+
+.th-artist {
+    width: 225px;
+}
+
+.th-tag {
+    width: 85px;
+}
+
+.th-date {
+    width: 125px;
+}
+
+.th-url {
+    width: 50px;
+}
+
+.th-note {
+    width: calc(100% - 30vw - 540px);
+}
+
+th.sort-asc::after {
+    content: "🔼";
+}
+
+th.sort-desc::after {
+    content: "🔽";
+}
+
+th {
+    position: sticky;
+    top: 0;
+    background-color: #ff69b4;
+    color: #fff;
+    z-index: 1;
+    padding-left: 3px;
+    text-align: left;
+}
+
+td {
+    padding-left: 3px;
+}
+
+td>p {
+    margin: 0px;
+}
+
+.fixedTh {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    border-right: 1px solid gray;
+}
+
+.fixedTh:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-right: 1px solid gray;
+    z-index: -1;
+}
+
+.fixed {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    border-right: 1px solid gray;
+}
+
+.fixed:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-right: 1px solid gray;
+    z-index: -1;
+}
+
+/* 奇数行 */
+.odd {
+    background-color: #fffafa;
+    color: #000;
+}
+
+/* 偶数行 */
+.even {
+    background-color: #ffc0cb;
+    color: #000;
+}
+
+/* 省略用三点リーダ */
+.ellipsis {
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.nowrap {
+    display: -webkit-box;
+}
+
+.line-1 {
+    -webkit-line-clamp: 1;
+}
+
+.line-2 {
+    -webkit-line-clamp: 2;
+}
+
+/* 日付変更用上付き二重線 */
+.border {
+    border-top: double 3px gray;
+}
+
+/* 下部リンク・注意書き */
+.footer {
+    display: table-cell;
+    text-align: left;
+    width: 100%;
+}
+
+.membership {
+    display: table-cell;
+    text-align: right;
+    vertical-align: bottom;
+    min-width: 160px;
+}
+
+/* 成型用 */
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.gray {
+    color: gray;
+}
+
+.mb5 {
+    margin-bottom: 5px;
+}
+
+.inline-block {
+    display: inline-block;
+}
