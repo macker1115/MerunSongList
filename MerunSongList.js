@@ -2,7 +2,6 @@ initialize();
 
 function initialize() {
   const table = document.querySelector('table');
-  const tableParent = table.parentElement;
 
   const input = document.querySelector('input');
   input.addEventListener('keypress', () => {
@@ -12,6 +11,8 @@ function initialize() {
   document.querySelectorAll('th').forEach(th => th.onclick = sortRows);
   document.querySelector('th').classList.add('sort-asc');
   hitCount();
+  document.querySelector('th:nth-of-type(5)').dispatchEvent(new PointerEvent("click"));
+  document.querySelector('th:nth-of-type(5)').dispatchEvent(new PointerEvent("click"));
 }
 
 function filterRows() {
@@ -86,7 +87,12 @@ function compareKeysReverse(a, b) {
 function changerowColor() {
   const table = document.querySelector("table");
   let count = -1;
+  var before = '';
   for (let row of table.rows) {
+    if (count == 0){
+      before = row.cells[4].textContent;
+    }
+    for (let cell of row.cells) cell.classList.remove('border');
     if (count >= 0) {
       if (row.classList.contains('displayNone')) continue;
       if (count % 2 == 0) {
@@ -94,6 +100,10 @@ function changerowColor() {
       }
       else {
         for (let cell of row.cells) cell.style.backgroundColor = '#fffafa';
+      }
+      if (before != row.cells[4].textContent){
+        for (let cell of row.cells) cell.classList.add('border');
+        before = row.cells[4].textContent;
       }
     }
     count++;
