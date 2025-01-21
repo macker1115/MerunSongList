@@ -193,6 +193,12 @@ td>p {
     border-top: double 3px gray;
 }
 
+/* 動画用上下二重線 */
+.border-tb {
+    border-top: double 3px gray;
+    border-bottom: double 3px gray;
+}
+
 /* 下部リンク・注意書き */
 .footer {
     display: table-cell;

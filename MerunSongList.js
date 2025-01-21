@@ -110,6 +110,9 @@ function changerowColor() {
         for (let cell of row.cells) cell.classList.add('border');
         before = row.cells[4].textContent;
       }
+      if (row.cells[6].textContent.includes('Cover MV')){
+        for (let cell of row.cells) cell.classList.add('border-tb');
+      }
     }
     count++;
   }
