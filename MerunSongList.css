@@ -8,8 +8,32 @@
         min-width: 75px !important;
     }
 
-    .fixedTh {
-        width: 50vw !important;
+    table {
+        min-width: 0 !important;
+        width: max-content;
+        table-layout: fixed;
+    }
+
+    .table-div {
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
+    .fixedTh,
+    .th-title {
+        width: 40vw !important;
+        min-width: 40vw !important;
+        max-width: 40vw !important;
+    }
+
+    td.fixed {
+        max-width: 30vw;
+        overflow: hidden;
+    }
+
+    .th-note {
+        width: 200px !important;
+        min-width: 200px;
     }
 }
 
